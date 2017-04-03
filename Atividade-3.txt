@@ -1,0 +1,36 @@
+// Java8 
+
+@FunctionalInterface
+public interface InterfaceFuncional {
+	public void sayHello(String name);
+}
+
+public class InterfaceFuncionalTest{
+
+	public static void main(String[] args) {
+		
+		InterfaceFuncional instance = n -> System.out.println("Hello World " + n);
+		teste(instance, "Will");
+	}
+	
+	private static void teste(InterfaceFuncional instance, String nome){
+		instance.sayHello(nome);
+	}
+
+}
+
+// JS
+
+function test(){
+
+
+	return "Hello World!";
+
+
+}
+
+
+test();
+
+
+"Hello World!"
