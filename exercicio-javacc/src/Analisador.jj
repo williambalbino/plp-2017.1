@@ -1,0 +1,35 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(Analisador)
+public class Analisador{  public static void main(String args []) throws ParseException  {    Analisador parser = new Analisador(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (Analisador.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        Analisador.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(Analisador)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < OPERADOR : "+"|"-"|"*"|"/" >
+| < ponto_virg : ";" >}TOKEN :{   < num_int : ([ "0"-"9" ]) >}int one_line() :{}{  operacao() ";"  {    return 0;  }
+| ";"
+  {
+    return 1;
+  }
+  }
+
+void operacao(): {}
+{
+ 	termo()((< OPERADOR >) termo())*
+}
+
+void termo():{}
+{
+	unary()((< OPERADOR >)unary())*
+}
+
+void unary():{}
+{
+	< OPERADOR > elemento() | elemento()
+}
+
+void elemento():{}
+{
+		< num_int >  | "(" operacao() ")"
+}
+
+
+
+
+
