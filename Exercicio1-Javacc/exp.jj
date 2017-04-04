@@ -1,0 +1,43 @@
+PARSER_BEGIN(test)
+class test{
+	public static void main(String[] args) throws ParseException{
+		try{
+			test analisador = new test(System.in);
+			analisador.Programa();
+			System.out.println("Compilou!");
+		}catch(ParseException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println("Encontrou erro!");
+		}
+	}
+}
+
+PARSER_END(test)
+
+TOKEN:
+{
+	<MAIN: "public static void Main()">{System.out.println("MAIN -> "+image);}
+	| <PROGRAMA: "Programa" > {System.out.println("PROGRAMA -> "+image);}
+	| <IF: "ien" > {System.out.println("IF -> "+image);}
+}
+
+TOKEN:
+{
+	<LPAREN: "(" >{System.out.println("LPAREN -> "+image);}
+	|<RPAREN: ")" >{System.out.println("RPAREN -> "+image);}
+	|<LCHAVE: "{" >{System.out.println("LCHAVE -> "+image);}
+	|<RCHAVE: "}" >{System.out.println("RCHAVE -> "+image);}
+	|<PONTO_VIRGULA: ";" >{System.out.println("PONTO E VIRGULA -> "+image);}
+}
+
+TOKEN:
+{
+	<ASIGNACION : "=" >{System.out.println("ASIGNACION -> "+image+"\r\n");}
+	|<MENOR: "<" >{System.out.println("MENOR QUE -> "+image);}
+}
+
+SKIP:
+{
+	" " | "\r\n" | "\t"
+}
